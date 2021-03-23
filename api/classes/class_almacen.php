@@ -118,3 +118,6 @@ class Almacen extends Conecction{
         }        
     }
 }
+
+
+/********** Casi que no puedo subir eso al git  */
