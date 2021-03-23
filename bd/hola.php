@@ -1,1 +1,0 @@
-porque no puedo hacer el git reque

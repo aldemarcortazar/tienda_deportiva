@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-03-2021 a las 23:38:55
+-- Tiempo de generación: 23-03-2021 a las 23:52:33
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.3.26
 
@@ -216,6 +216,7 @@ INSERT INTO `tipo_usuario` (`id_tipo_usu`, `nom_tipo_usu`) VALUES
 
 CREATE TABLE `usuarios` (
   `documento` int(12) NOT NULL,
+  `password` varchar(12) NOT NULL,
   `id_tipo_docu` int(12) NOT NULL,
   `id_tipo_usu` int(12) NOT NULL,
   `nombres` varchar(35) NOT NULL,
@@ -228,9 +229,9 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`documento`, `id_tipo_docu`, `id_tipo_usu`, `nombres`, `apellidos`, `telefono`, `correo`) VALUES
-(12241412, 2, 2, 'Aldemar', 'Niño Cortazar', NULL, 'aldemar@misena.edu.co'),
-(1005712070, 1, 1, 'Luis Miguel', 'Garcia Aranzalez', 2143907884, 'lmgarcia@ut.edu.co');
+INSERT INTO `usuarios` (`documento`, `password`, `id_tipo_docu`, `id_tipo_usu`, `nombres`, `apellidos`, `telefono`, `correo`) VALUES
+(12241412, '', 2, 2, 'Aldemar', 'Niño Cortazar', NULL, 'aldemar@misena.edu.co'),
+(1005712070, '', 1, 1, 'Luis Miguel', 'Garcia Aranzalez', 2143907884, 'lmgarcia@ut.edu.co');
 
 -- --------------------------------------------------------
 
@@ -243,14 +244,14 @@ CREATE TABLE `venta_encabezado` (
   `fecha_venta` date NOT NULL,
   `id_forma_pago` int(12) NOT NULL,
   `documento` int(12) NOT NULL,
-  `total_vennta_enca` double NOT NULL
+  `total_venta_enca` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `venta_encabezado`
 --
 
-INSERT INTO `venta_encabezado` (`id_venta_enca`, `fecha_venta`, `id_forma_pago`, `documento`, `total_vennta_enca`) VALUES
+INSERT INTO `venta_encabezado` (`id_venta_enca`, `fecha_venta`, `id_forma_pago`, `documento`, `total_venta_enca`) VALUES
 (1, '2021-03-16', 1, 12241412, 30000);
 
 --
