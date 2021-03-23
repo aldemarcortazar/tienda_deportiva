@@ -1,11 +1,12 @@
-
-
+import authenticate from './../../helpers/authenticate.js';
 const FormSubmit = (e) => {
     e.preventDefault();
     const $username = document.getElementById("username").value;
     const $password = document.getElementById("password").value;
-    console.log($username);
-    console.log($password);
+    authenticate({
+        username: $username,
+        password: $password,
+    });
 }
 
 export default FormSubmit;
