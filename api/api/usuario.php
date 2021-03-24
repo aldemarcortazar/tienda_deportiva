@@ -56,7 +56,7 @@ switch($_SERVER['REQUEST_METHOD']){
     case 'POST':
         // Para agregar usuarios   
         $_POST = json_decode(file_get_contents('php://input'), true);
-        $user = new Usuario($_POST['documento'], $_POST['nombres'], $_POST['apellidos'] , $_POST['id_tip_docu'], $_POST['id_tip_usua'] , $_POST['telefono'] , $_POST['correo'], null);
+        $user = new Usuario($_POST['documento'],$_POST['password'], $_POST['nombres'], $_POST['apellidos'] , $_POST['id_tip_docu'], $_POST['id_tip_usua'] , $_POST['telefono'] , $_POST['correo']);
         $res ;
         if($user->addUser()){
             $res = array(

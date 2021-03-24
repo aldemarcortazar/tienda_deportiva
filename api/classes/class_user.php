@@ -12,16 +12,16 @@ class Usuario extends Conecction{
     private $correo;
     private $password;
 
-    public function __construct($documento = null, $nombres = null, $apellidos = null, $id_tipo_docu = null, $id_tipo_usu = null, $telefono = null, $correo = null, $password = null)
+    public function __construct($documento = null, $password = null, $nombres = null, $apellidos = null, $id_tipo_docu = null, $id_tipo_usu = null, $telefono = null, $correo = null)
     {
         parent::__construct();
-        $this->$documento = $documento;
-        $this->$nombres = $nombres;
-        $this->$apellidos = $apellidos;
-        $this->$id_tipo_docu = $id_tipo_docu;
-        $this->$id_tipo_usu = $id_tipo_usu;
-        $this->$telefono = $telefono;
-        $this->$correo = $correo;
+        $this->documento = $documento;
+        $this->nombres = $nombres;
+        $this->apellidos = $apellidos;
+        $this->id_tipo_docu = $id_tipo_docu;
+        $this->id_tipo_usu = $id_tipo_usu;
+        $this->telefono = $telefono;
+        $this->correo = $correo;
         $this->password = $password;
     }
 
@@ -83,12 +83,12 @@ class Usuario extends Conecction{
 
     public function addUser(){
         try{
-            $sql = 'INSERT INTO usuarios (documento, id_tipo_docu, id_tipo_usu, nombres, apellidos, telefono, correo) VALUES (?,?,?,?,?,?,?)';
+            $sql = 'INSERT INTO usuarios (documento,password, id_tipo_docu, id_tipo_usu, nombres, apellidos, telefono, correo) VALUES (?,?,?,?,?,?,?,?)';
             $query = mysqli_prepare($this->connection, $sql);
-            $ok = mysqli_stmt_bind_param($query,'iiissis',$this->documento, $this->id_tipo_docu, $this->id_tipo_usu, $this->nombres, $this->apellidos, $this->telefono, $this->correo);
+            $ok = mysqli_stmt_bind_param($query,'isiissis',$this->documento,$this->password, $this->id_tipo_docu, $this->id_tipo_usu, $this->nombres, $this->apellidos, $this->telefono, $this->correo);
             $ok = mysqli_stmt_execute($query);
             mysqli_stmt_close($query);
-            return true;
+            return $ok;
         }
         catch(Throwable $except){
             echo $except;
@@ -99,15 +99,18 @@ class Usuario extends Conecction{
     public function getAllUsers(){
         try{
             $users = [];
-            $sql = 'SELECT documento, usuarios.id_tipo_docu , usuarios.id_tipo_usu , nombres , apellidos , correo ,telefono, tipo_usuario.nom_tipo_usu , tipo_documento.nom_tipo_docu from usuarios inner join tipo_usuario on usuarios.id_tipo_usu = tipo_usuario.id_tipo_usu inner join tipo_documento on usuarios.id_tipo_docu = tipo_documento.id_tipo_docu';
+            $sql = 'SELECT documento, usuarios.id_tipo_docu , usuarios.id_tipo_usu ,
+             nombres , usuarios.apellidos , correo ,telefono, tipo_usuario.nom_tipo_usu ,
+              tipo_documento.nom_tipo_docu from usuarios inner join tipo_usuario on usuarios.id_tipo_usu = tipo_usuario.id_tipo_usu
+              6 inner join tipo_documento on usuarios.id_tipo_docu = tipo_documento.id_tipo_docu';
             $query = mysqli_prepare($this->connection, $sql);
             $ok = mysqli_stmt_execute($query);
             $ok = mysqli_stmt_bind_result($query,$this->documento,
             $this->id_tipo_docu, 
             $this->id_tipo_usu, 
-            $this->nombres, 
+            $this->nombres,
+            $correo, 
             $this->correo, 
-            $this->apellidos,
             $this->telefono, 
             $nom_tipo_usua, 
             $nom_tip_docu
@@ -117,7 +120,7 @@ class Usuario extends Conecction{
                 'id_tipo_docu' => $this->id_tipo_docu,
                 'id_tipo_usu' => $this->id_tipo_usu, 
                 'nombres' =>$this->nombres, 
-                'apellidos' => $this->getApellidos(), 
+                'apellidos' => null, 
                 'correo' => $this->correo, 
                 'telefono' => $this->telefono,  
                 'nom_tip_usua' => $nom_tipo_usua,
@@ -125,7 +128,7 @@ class Usuario extends Conecction{
                 ]);
             }
             mysqli_stmt_close($query);
-            return $users;
+            return $ok;
         }
         catch(Throwable $exe){
             echo $exe;
