@@ -1,9 +1,9 @@
 const API = 'api/api/',
-USER = `${api}usuario.php`,
-ALMACEN = `${api}almacen.php`,
-DETA_VENTA = `${api}detalle_vent.php`,
-VENTA_ENCA = `${api}venta_enca-php`,
-PRENDAS = `${api}prendas.php`;
+USER = `${API}usuario.php`,
+ALMACEN = `${API}almacen.php`,
+DETA_VENTA = `${API}detalle_vent.php`,
+VENTA_ENCA = `${API}venta_enca-php`,
+PRENDAS = `${API}prendas.php`;
 
 export default {
     API,

@@ -101,15 +101,14 @@ class Usuario extends Conecction{
             $users = [];
             $sql = 'SELECT documento, usuarios.id_tipo_docu , usuarios.id_tipo_usu ,
              nombres , usuarios.apellidos , correo ,telefono, tipo_usuario.nom_tipo_usu ,
-              tipo_documento.nom_tipo_docu from usuarios inner join tipo_usuario on usuarios.id_tipo_usu = tipo_usuario.id_tipo_usu
-              6 inner join tipo_documento on usuarios.id_tipo_docu = tipo_documento.id_tipo_docu';
+              tipo_documento.nom_tipo_docu from usuarios inner join tipo_usuario on usuarios.id_tipo_usu = tipo_usuario.id_tipo_usu inner join tipo_documento on usuarios.id_tipo_docu = tipo_documento.id_tipo_docu';
             $query = mysqli_prepare($this->connection, $sql);
             $ok = mysqli_stmt_execute($query);
             $ok = mysqli_stmt_bind_result($query,$this->documento,
             $this->id_tipo_docu, 
             $this->id_tipo_usu, 
             $this->nombres,
-            $correo, 
+            $this->apellidos, 
             $this->correo, 
             $this->telefono, 
             $nom_tipo_usua, 
@@ -120,7 +119,7 @@ class Usuario extends Conecction{
                 'id_tipo_docu' => $this->id_tipo_docu,
                 'id_tipo_usu' => $this->id_tipo_usu, 
                 'nombres' =>$this->nombres, 
-                'apellidos' => null, 
+                'apellidos' => $this->apellidos, 
                 'correo' => $this->correo, 
                 'telefono' => $this->telefono,  
                 'nom_tip_usua' => $nom_tipo_usua,
@@ -128,7 +127,7 @@ class Usuario extends Conecction{
                 ]);
             }
             mysqli_stmt_close($query);
-            return $ok;
+            return $users;
         }
         catch(Throwable $exe){
             echo $exe;
@@ -168,7 +167,7 @@ class Usuario extends Conecction{
             $sql = 'SELECT * FROM usuarios WHERE documento = ?';
             $query = mysqli_prepare($this->connection, $sql);
             $ok = mysqli_stmt_execute($query);
-            $ok = mysqli_stmt_bind_result($query,$this->documento, $this->nombres, $this->apellidos, $this->id_tipo_docu, $this->id_tipo_usu, $this->telefono, $this->correo);
+            $ok = mysqli_stmt_bind_result($query,$this->documento, $this->password, $this->nombres, $this->apellidos, $this->id_tipo_docu, $this->id_tipo_usu, $this->telefono, $this->correo);
             while(mysqli_stmt_fetch($query)){
                 array_push($users,['documento'=>$this->documento, 'nombres' =>$this->nombres, 'apellidos' => $this->apellidos, 'id_tipo_docu' => $this->id_tipo_docu, 'id_tipo_usu' => $this->id_tipo_usu, 'telefono' => $this->telefono, 'correo' => $this->correo]);
             }
@@ -187,7 +186,26 @@ class Usuario extends Conecction{
             $query = mysqli_prepare($this->connection , $sql);
             $ok = mysqli_stmt_bind_param($query , 'is' , $this->documento , $this->password);
             $ok = mysqli_stmt_execute($query);
-            $ok = mysqli_stmt_bind_result($query , $this->documento , $this->id_tipo_docu);
+            $ok = mysqli_stmt_bind_result($query ,
+             $this->documento ,
+             $this->password ,
+             $this->id_tipo_docu,
+             $this->id_tipo_usua,
+             $this->nombres, 
+             $this->apellidos,
+             $this->telefono,
+             $this->correo
+            );
+            while(mysqli_stmt_fetch($query)){
+                array_push( $user,['docuemento' => $documento,
+                    'id_tip_docu' => $this->id_tipo_docu,
+                    'id_tip_usua' => $this->id_tipo_usu,
+                    'nombres' => $this->nombres,
+                    'telefono' => $this->telefono,
+                    'correo' => $this->correo
+                ]);
+            }
+            return $user;
         }catch(Throwable $ex){
             echo "el error esta en $ex";
             return false;

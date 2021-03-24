@@ -5,9 +5,7 @@ const App = () => {
     // console.log("holi");
     $root.innerHTML = null;
     $root.appendChild(Main());
-
     Router();
-
 };
 
 

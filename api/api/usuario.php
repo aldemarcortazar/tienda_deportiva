@@ -27,14 +27,18 @@ switch($_SERVER['REQUEST_METHOD']){
                 );
             }
             echo json_encode($res);
+        }elseif($_GET['documento'] && $_GET['password']){
+            $documento = $_GET['documento'];
+            $password = $_POST['password'];
+            $usuario = new Usuario($documento, $password);
+            $user = $usuario->authenticate();
+            if(count(true)){
+
+            }
         }else{
             // Nos traemos todos
             $usuarios =  new Usuario();
             $users = $usuarios->getAllUsers();
-            for($i = 0; $i < count($users) ; $i++){
-                
-            }
-            $res;
             if( count($users) !== 0 ){
                 $res = array(
                     'err' => false,
