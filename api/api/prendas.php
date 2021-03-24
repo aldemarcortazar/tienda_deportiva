@@ -52,7 +52,7 @@ switch($_SERVER['REQUEST_METHOD']){
     case 'POST':
         // Para agregar prendas
         $_POST = json_decode( file_get_contents('php://input'), true );
-        $prenda = new Prenda($_POST['id_prenda'] , $_POST['almacen'] , $_POST['tipo_prenda'] , $_POST['categoria'] , $_POST['talla'] , $_POST['tip_ropa'] , $_POST['nom_prenda'] , $_POST['color'] , $_POST['precio']);
+        $prenda = new Prenda(null , $_POST['almacen'] , $_POST['tipo_prenda'] , $_POST['categoria'] , $_POST['talla'] , $_POST['tip_ropa'] , $_POST['nom_prenda'] , $_POST['color'] , $_POST['precio']);
         $res;
         if($prenda->addPrenda()){
             // Funciono el agregar

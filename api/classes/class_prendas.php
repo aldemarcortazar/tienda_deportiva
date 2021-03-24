@@ -109,7 +109,7 @@ class Prenda extends Conecction{
 
     public function addPrenda(){
         try{
-            $sql = 'INSERT INTO prendas (id_prenda, id_almacen, id_tipo_prenda, id_categoria, id_talla, id_tipo_ropa, nom_prenda, precio, color, fecha_creacion) VALUES (?,?,?,?,?,?,?,?,?,?)';
+            $sql = 'INSERT INTO prendas (id_prenda, id_almacen, id_tipo_prenda, id_categoria, id_talla, id_tipo_ropa, nom_prenda, precio, color, fecha_creacion) VALUES (null,?,?,?,?,?,?,?,?,?)';
             $query = mysqli_prepare($this->connection, $sql);
             $ok = mysqli_stmt_bind_param($query,'iiiiisiss',$this->almacen, $this->tipo_prenda, $this->categoria, $this->talla, $this->tipo_ropa, $this->nombre_prenda, $this->precio, $this->color, $this->fecha_creacion);
             $ok = mysqli_stmt_execute($query);

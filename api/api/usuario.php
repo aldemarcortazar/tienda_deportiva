@@ -31,6 +31,9 @@ switch($_SERVER['REQUEST_METHOD']){
             // Nos traemos todos
             $usuarios =  new Usuario();
             $users = $usuarios->getAllUsers();
+            for($i = 0; $i < count($users) ; $i++){
+                
+            }
             $res;
             if( count($users) !== 0 ){
                 $res = array(
@@ -53,7 +56,7 @@ switch($_SERVER['REQUEST_METHOD']){
     case 'POST':
         // Para agregar usuarios   
         $_POST = json_decode(file_get_contents('php://input'), true);
-        $user = new Usuario($_POST['documento'], $_POST['nombres'], $_POST['apellidos'] , $_POST['id_tip_docu'], $_POST['id_tip_usua'] , $_POST['telefono'] , $_POST['correo']);
+        $user = new Usuario($_POST['documento'], $_POST['nombres'], $_POST['apellidos'] , $_POST['id_tip_docu'], $_POST['id_tip_usua'] , $_POST['telefono'] , $_POST['correo'], null);
         $res ;
         if($user->addUser()){
             $res = array(

@@ -22,7 +22,4 @@
             }
         }
     }
-
-    $con = new Conecction();
-    var_dump($con);
 ?>

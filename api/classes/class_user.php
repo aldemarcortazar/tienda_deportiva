@@ -10,8 +10,9 @@ class Usuario extends Conecction{
     private $id_tipo_usu;
     private $telefono;
     private $correo;
+    private $password;
 
-    public function __construct($documento = null, $nombres = null, $apellidos = null, $id_tipo_docu = null, $id_tipo_usu = null, $telefono = null, $correo = null)
+    public function __construct($documento = null, $nombres = null, $apellidos = null, $id_tipo_docu = null, $id_tipo_usu = null, $telefono = null, $correo = null, $password = null)
     {
         parent::__construct();
         $this->$documento = $documento;
@@ -21,6 +22,7 @@ class Usuario extends Conecction{
         $this->$id_tipo_usu = $id_tipo_usu;
         $this->$telefono = $telefono;
         $this->$correo = $correo;
+        $this->password = $password;
     }
 
     public function getDocumento(){
@@ -81,9 +83,9 @@ class Usuario extends Conecction{
 
     public function addUser(){
         try{
-            $sql = 'INSERT INTO usuarios (documento, nombres, apellidos, id_tipo_docu, id_tipo_usu, telefono, correo) VALUES (?,?,?,?,?,?,?)';
+            $sql = 'INSERT INTO usuarios (documento, id_tipo_docu, id_tipo_usu, nombres, apellidos, telefono, correo) VALUES (?,?,?,?,?,?,?)';
             $query = mysqli_prepare($this->connection, $sql);
-            $ok = mysqli_stmt_bind_param($query,'issiiis',$this->documento, $this->nombres, $this->apellidos, $this->id_tipo_docu, $this->id_tipo_usu, $this->telefono, $this->correo);
+            $ok = mysqli_stmt_bind_param($query,'iiissis',$this->documento, $this->id_tipo_docu, $this->id_tipo_usu, $this->nombres, $this->apellidos, $this->telefono, $this->correo);
             $ok = mysqli_stmt_execute($query);
             mysqli_stmt_close($query);
             return true;
@@ -97,12 +99,30 @@ class Usuario extends Conecction{
     public function getAllUsers(){
         try{
             $users = [];
-            $sql = 'SELECT * FROM usuarios';
+            $sql = 'SELECT documento, usuarios.id_tipo_docu , usuarios.id_tipo_usu , nombres , apellidos , correo ,telefono, tipo_usuario.nom_tipo_usu , tipo_documento.nom_tipo_docu from usuarios inner join tipo_usuario on usuarios.id_tipo_usu = tipo_usuario.id_tipo_usu inner join tipo_documento on usuarios.id_tipo_docu = tipo_documento.id_tipo_docu';
             $query = mysqli_prepare($this->connection, $sql);
             $ok = mysqli_stmt_execute($query);
-            $ok = mysqli_stmt_bind_result($query,$this->documento, $this->nombres, $this->apellidos, $this->id_tipo_docu, $this->id_tipo_usu, $this->telefono, $this->correo);
+            $ok = mysqli_stmt_bind_result($query,$this->documento,
+            $this->id_tipo_docu, 
+            $this->id_tipo_usu, 
+            $this->nombres, 
+            $this->correo, 
+            $this->apellidos,
+            $this->telefono, 
+            $nom_tipo_usua, 
+            $nom_tip_docu
+            );
             while(mysqli_stmt_fetch($query)){
-                array_push($users,['documento'=>$this->documento, 'nombres' =>$this->nombres, 'apellidos' => $this->apellidos, 'id_tipo_docu' => $this->id_tipo_docu, 'id_tipo_usu' => $this->id_tipo_usu, 'telefono' => $this->telefono, 'correo' => $this->correo]);
+                array_push($users,['documento'=>$this->documento,
+                'id_tipo_docu' => $this->id_tipo_docu,
+                'id_tipo_usu' => $this->id_tipo_usu, 
+                'nombres' =>$this->nombres, 
+                'apellidos' => $this->getApellidos(), 
+                'correo' => $this->correo, 
+                'telefono' => $this->telefono,  
+                'nom_tip_usua' => $nom_tipo_usua,
+                'nom_tip_docu' => $nom_tip_docu
+                ]);
             }
             mysqli_stmt_close($query);
             return $users;
@@ -156,5 +176,18 @@ class Usuario extends Conecction{
             return false;
         }
         return [];
+    }
+    public function authenticate($documento , $password){
+        try{
+            $user = [];
+            $sql = "SELECT * from usuarios where documento = ? and password = ?";
+            $query = mysqli_prepare($this->connection , $sql);
+            $ok = mysqli_stmt_bind_param($query , 'is' , $this->documento , $this->password);
+            $ok = mysqli_stmt_execute($query);
+            $ok = mysqli_stmt_bind_result($query , $this->documento , $this->id_tipo_docu);
+        }catch(Throwable $ex){
+            echo "el error esta en $ex";
+            return false;
+        }
     }
 } 
