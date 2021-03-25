@@ -100,17 +100,17 @@ class Usuario extends Conecction{
         try{
             $users = [];
             $sql = 'SELECT documento, usuarios.id_tipo_docu , usuarios.id_tipo_usu ,
-             nombres , usuarios.apellidos , correo ,telefono, tipo_usuario.nom_tipo_usu ,
-              tipo_documento.nom_tipo_docu from usuarios inner join tipo_usuario on usuarios.id_tipo_usu = tipo_usuario.id_tipo_usu inner join tipo_documento on usuarios.id_tipo_docu = tipo_documento.id_tipo_docu';
+             nombres , usuarios.apellidos , telefono, correo , tipo_usuario.nom_tipo_usu ,
+            tipo_documento.nom_tipo_docu from usuarios inner join tipo_usuario on usuarios.id_tipo_usu = tipo_usuario.id_tipo_usu inner join tipo_documento on usuarios.id_tipo_docu = tipo_documento.id_tipo_docu';
             $query = mysqli_prepare($this->connection, $sql);
             $ok = mysqli_stmt_execute($query);
             $ok = mysqli_stmt_bind_result($query,$this->documento,
             $this->id_tipo_docu, 
             $this->id_tipo_usu, 
             $this->nombres,
-            $this->apellidos, 
+            $this->apellidos,
+            $this->telefono,  
             $this->correo, 
-            $this->telefono, 
             $nom_tipo_usua, 
             $nom_tip_docu
             );
@@ -182,27 +182,35 @@ class Usuario extends Conecction{
     public function authenticate($documento , $password){
         try{
             $user = [];
-            $sql = "SELECT * from usuarios where documento = ? and password = ?";
+            $sql = 'SELECT documento, usuarios.id_tipo_docu , usuarios.id_tipo_usu,
+            nombres , usuarios.apellidos , telefono, correo , tipo_usuario.nom_tipo_usu ,
+            tipo_documento.nom_tipo_docu from usuarios inner join tipo_usuario
+            on usuarios.id_tipo_usu = tipo_usuario.id_tipo_usu inner join tipo_documento on
+             usuarios.id_tipo_docu = tipo_documento.id_tipo_docu where documento = ? and password = ?';
             $query = mysqli_prepare($this->connection , $sql);
-            $ok = mysqli_stmt_bind_param($query , 'is' , $this->documento , $this->password);
+            $ok = mysqli_stmt_bind_param($query , 'is' , $documento , $password);
             $ok = mysqli_stmt_execute($query);
             $ok = mysqli_stmt_bind_result($query ,
              $this->documento ,
-             $this->password ,
              $this->id_tipo_docu,
              $this->id_tipo_usua,
              $this->nombres, 
              $this->apellidos,
              $this->telefono,
-             $this->correo
+             $this->correo,
+             $nomTipUsua,
+             $nomTipDocu
             );
             while(mysqli_stmt_fetch($query)){
-                array_push( $user,['docuemento' => $documento,
+                array_push( $user,['documento' => $documento,
                     'id_tip_docu' => $this->id_tipo_docu,
-                    'id_tip_usua' => $this->id_tipo_usu,
+                    'id_tip_usua' => $this->id_tipo_usua,
                     'nombres' => $this->nombres,
+                    'apellidos' => $this->apellidos,
                     'telefono' => $this->telefono,
-                    'correo' => $this->correo
+                    'correo' => $this->correo,
+                    'nom_tip_usua' => $nomTipUsua,
+                    'nom_tip_docu' => $nomTipDocu
                 ]);
             }
             return $user;

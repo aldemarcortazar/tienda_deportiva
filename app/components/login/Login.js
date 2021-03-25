@@ -12,7 +12,7 @@ const Login = () => {
         <link rel="stylesheet" href="./app/components/login/login.css">
         <h1>Iniciar Sesion</h1>
             <label for="username">Username</label>
-            <input type="text" name="username" id="username" class="username">
+            <input type="number" name="username" id="username" class="username">
             <label for="password">Password</label>
             <input type="password" name="password" id="password" class="username">
 
