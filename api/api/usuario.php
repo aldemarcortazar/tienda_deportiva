@@ -5,8 +5,8 @@ header('Content-Type: application/json');
 switch($_SERVER['REQUEST_METHOD']){
     case 'GET':
         // Aca hacemos la peticion para obtener
-        if(isset($_GET['documento'])){
-            $documento = $_GET['documento'];
+        if(isset($_GET['document'])){
+            $documento = $_GET['document'];
             // Nos traemos uno segun ese documento
             $usuario = new Usuario($documento);
             $usuario = $usuario->getUser();
@@ -27,15 +27,16 @@ switch($_SERVER['REQUEST_METHOD']){
                 );
             }
             echo json_encode($res);
-        }elseif($_GET['documento'] && $_GET['password']){
+        }elseif(isset($_GET['documento']) && isset($_GET['password'])){
             $documento = $_GET['documento'];
-            $password = $_POST['password'];
+            $password = $_GET['password'];
             $usuario = new Usuario($documento, $password);
             $user = $usuario->authenticate($documento, $password);
             if(count(true)){
 
             }
-        }else{
+            echo json_encode($res);
+        }elseif(!isset($_GET['documento'])){
             // Nos traemos todos
             $usuarios =  new Usuario();
             $users = $usuarios->getAllUsers();
