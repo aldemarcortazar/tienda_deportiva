@@ -1,7 +1,9 @@
 import ajax from './ajax.js';
 import API from './api.js';
-const authenticate = ({documento , password }) => {
-    ajax({
+const authenticate = async ({documento , password }) => {
+    const $load = document.querySelector(".load");
+    $load.style.display = 'block';
+    await ajax({
         url: `${API.USER}/?documento=${documento}&password=${password}`,
         method: 'GET',
         cbSuccess: ( user ) => {
@@ -15,6 +17,8 @@ const authenticate = ({documento , password }) => {
             return false; 
         }
     });
+    $load.style.display = 'none';
+
 }
 
 export default authenticate;

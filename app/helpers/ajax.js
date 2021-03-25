@@ -1,7 +1,7 @@
 
 
-const ajax = ({url, method, cbSuccess, data}) => {
-    fetch(url , {
+const ajax = async({url, method, cbSuccess, data}) => {
+    await fetch(url , {
         body:data,
         method
     })
@@ -16,7 +16,7 @@ const ajax = ({url, method, cbSuccess, data}) => {
             </div>
         `;
 
-        document.querySelector('.Loader').style.display = "none";
+        // document.querySelector('.Loader').style.display = "none";
         console.log(err);
       });
 }

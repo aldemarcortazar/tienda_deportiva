@@ -3,9 +3,10 @@ const Menu = () => {
     $menu.classList.add("menu");
     $menu.innerHTML = `
         <a href="#/"> Inicio </a>
-        <a href="#/Ropa"> Ropa </a>
-        <a href="#/Agregar"> Comprar </a>
-        <a href="#/Compras"> Compras </a>
+        <a href="#/prendasvendidas"> Prendas Mas Vendidas </a>
+        <a href="#/sinvender"> Sin vender </a>
+        <a href="#/estadisticas"> Estadisticas ventas </a>
+        <a href ="#/compras"> compras </a>
         
     `;
     return $menu;

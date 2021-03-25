@@ -32,8 +32,21 @@ switch($_SERVER['REQUEST_METHOD']){
             $password = $_GET['password'];
             $usuario = new Usuario($documento, $password);
             $user = $usuario->authenticate($documento, $password);
-            if(count(true)){
-
+            $res ;
+            if(count($user) !== 0){
+                $res = array(
+                    'err' => false,
+                    'status' => http_response_code(200),
+                    'statusText' => "usuario encontrado con exito",
+                    'data' => $user
+                );
+            }else{
+                $res = array (
+                    'err' => true,
+                    'status' => http_response_code(200),
+                    'statusText' => 'no se encontro el usuario',
+                    'data' => []
+                );
             }
             echo json_encode($res);
         }elseif(!isset($_GET['documento'])){
