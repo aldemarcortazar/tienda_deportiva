@@ -23,7 +23,7 @@ switch($_SERVER['REQUEST_METHOD']){
                     'err' => false,
                     'status' => http_response_code(200),
                     'statusText' => 'No se encontro el usuario',
-                    'data' => $usuarios 
+                    'data' => $usuario 
                 );
             }
             echo json_encode($res);
@@ -31,7 +31,7 @@ switch($_SERVER['REQUEST_METHOD']){
             $documento = $_GET['documento'];
             $password = $_POST['password'];
             $usuario = new Usuario($documento, $password);
-            $user = $usuario->authenticate();
+            $user = $usuario->authenticate($documento, $password);
             if(count(true)){
 
             }

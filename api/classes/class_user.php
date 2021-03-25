@@ -166,13 +166,14 @@ class Usuario extends Conecction{
             $users = [];
             $sql = 'SELECT * FROM usuarios WHERE documento = ?';
             $query = mysqli_prepare($this->connection, $sql);
+            $ok = mysqli_stmt_bind_param($query, 'i', $this->documento);
             $ok = mysqli_stmt_execute($query);
             $ok = mysqli_stmt_bind_result($query,$this->documento, $this->password, $this->nombres, $this->apellidos, $this->id_tipo_docu, $this->id_tipo_usu, $this->telefono, $this->correo);
             while(mysqli_stmt_fetch($query)){
                 array_push($users,['documento'=>$this->documento, 'nombres' =>$this->nombres, 'apellidos' => $this->apellidos, 'id_tipo_docu' => $this->id_tipo_docu, 'id_tipo_usu' => $this->id_tipo_usu, 'telefono' => $this->telefono, 'correo' => $this->correo]);
             }
             mysqli_stmt_close($query);
-            return true;
+            return $users;
         }catch (Throwable $th) {
             echo "El error esta en" . $th;
             return false;

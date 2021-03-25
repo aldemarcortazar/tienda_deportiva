@@ -1,4 +1,5 @@
 import Login from './login/Login.js';
+import Principal from './user/principal.js';
 
 const Router = () => {
     let { hash } = location;
@@ -8,8 +9,8 @@ const Router = () => {
 
     if( !hash || hash === "#/" ){
         $main.appendChild(Login());
-    }else if(true){
-
+    }else if(hash == '#/usuario'){
+        $main.appendChild(Principal());
     }
 }
 
