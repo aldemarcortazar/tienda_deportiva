@@ -82,6 +82,7 @@ class Estadistica extends Conecction{
 
     public function setId_prenda($id_prenda){ $this->id_prenda = $id_prenda; }
 
+    // Para obtener datos completos de todas las ventas
     public function getAllFactura(){
         try{
             $factura = [];
@@ -120,6 +121,7 @@ class Estadistica extends Conecction{
         }
     }
 
+    // Para poder clasificar las facturas segun la fecha que queramos ver
     public function getAllFactura_fecha(){
         try{
             $factura_fecha = [];
@@ -158,6 +160,7 @@ class Estadistica extends Conecction{
         }
     }
 
+    // Para saber que cantidad se vendio de la misma prenda
     public function getCantidad_prendas_vendidas(){
         try{
             $Prendas_vendidas = [];
@@ -184,6 +187,7 @@ class Estadistica extends Conecction{
         }
     }
 
+    // Para saber cuantos dias demoro en vender desde el dia que se coloco en venta
     public function  getDias_prendas_vendidas(){
         try{
             $Dias_Prendas_vendidas = [];
@@ -209,6 +213,7 @@ class Estadistica extends Conecction{
         }
     }
 
+    //Dias que lleva sin vender la prenda
     public function  getDias_no_vendidas(){
         try{
             $Dias_no_vendidas = [];
@@ -233,6 +238,7 @@ class Estadistica extends Conecction{
         }
     }
 
+    // Usuarios que realizaron compras
     public function  getUser_buy(){
         try{
             $User_buy = [];
