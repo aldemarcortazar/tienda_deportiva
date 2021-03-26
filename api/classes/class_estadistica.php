@@ -280,17 +280,15 @@ class Estadistica extends Conecction{
             $sql = 'SELECT nom_prenda, timestampdiff(DAY, fecha_creacion, fecha_venta) AS Dias_Ventas 
                     FROM prendas,detalle_venta,venta_encabezado 
                     WHERE detalle_venta.id_prenda = prendas.id_prenda 
-                    AND detalle_venta.id_venta_enca = venta_encabezado.id_venta_enca 
-            ';
+                    AND detalle_venta.id_venta_enca = venta_encabezado.id_venta_enca';
             $query = mysqli_prepare($this->connection, $sql);
             $ok = mysqli_stmt_execute($query);
             $ok = mysqli_stmt_bind_result($query,
             $this->id_prenda,
-            $this->nom_prenda, 
-            $this->cantidad, 
+            $dias_ventas,  
             );
             while(mysqli_stmt_fetch($query)){
-                array_push($Dias_Prendas_vendidas,['id_prenda'=>$this->id_prenda, 'nom_prenda' =>$this->nom_prenda, 'cantidad' => $this->cantidad]);
+                array_push($Dias_Prendas_vendidas,['id_prenda'=>$this->id_prenda, 'Dias_Ventas' =>$dias_ventas]);
             }
             mysqli_stmt_close($query);
             return $Dias_Prendas_vendidas;
