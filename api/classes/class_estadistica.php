@@ -183,6 +183,7 @@ class Estadistica extends Conecction{
             return false;
         }
     }
+
     public function  getDias_prendas_vendidas(){
         try{
             $Dias_Prendas_vendidas = [];
@@ -193,11 +194,11 @@ class Estadistica extends Conecction{
             $query = mysqli_prepare($this->connection, $sql);
             $ok = mysqli_stmt_execute($query);
             $ok = mysqli_stmt_bind_result($query,
-            $this->id_prenda,
+            $this->nom_prenda,
             $dias_ventas,  
             );
             while(mysqli_stmt_fetch($query)){
-                array_push($Dias_Prendas_vendidas,['id_prenda'=>$this->id_prenda, 'Dias_Ventas' =>$dias_ventas]);
+                array_push($Dias_Prendas_vendidas,['nom_prenda'=>$this->nom_prenda, 'Dias_Ventas' =>$dias_ventas]);
             }
             mysqli_stmt_close($query);
             return $Dias_Prendas_vendidas;
@@ -207,4 +208,59 @@ class Estadistica extends Conecction{
             return false;
         }
     }
+
+    public function  getDias_no_vendidas(){
+        try{
+            $Dias_no_vendidas = [];
+            $sql = 'SELECT nom_prenda,timestampdiff(DAY, fecha_creacion, curdate()) AS Dias_Sin_vender 
+                    FROM prendas 
+                    WHERE NOT id_prenda IN (SELECT id_prenda FROM detalle_venta) ';
+            $query = mysqli_prepare($this->connection, $sql);
+            $ok = mysqli_stmt_execute($query);
+            $ok = mysqli_stmt_bind_result($query,
+            $this->nom_prenda,
+            $dias_sin_vender,  
+            );
+            while(mysqli_stmt_fetch($query)){
+                array_push($Dias_no_vendidas,['id_prenda'=>$this->id_prenda, 'Dias_Sin_vender' =>$dias_sin_vender]);
+            }
+            mysqli_stmt_close($query);
+            return $Dias_no_vendidas;
+        }
+        catch(Throwable $exe){
+            echo $exe;
+            return false;
+        }
+    }
+
+    public function  getUser_buy(){
+        try{
+            $User_buy = [];
+            $sql = 'SELECT id_venta_enca,fecha_venta,usuarios.documento,nom_tipo_docu, nombres,apellidos 
+                    FROM usuarios, tipo_documento,venta_encabezado 
+                    WHERE usuarios.documento IN (SELECT documento FROM venta_encabezado) 
+                    AND usuarios.id_tipo_docu = tipo_documento.id_tipo_docu 
+                    AND venta_encabezado.documento = usuarios.documento';
+            $query = mysqli_prepare($this->connection, $sql);
+            $ok = mysqli_stmt_execute($query);
+            $ok = mysqli_stmt_bind_result($query,
+            $this->id_venta_enca,
+            $this->fecha_venta,
+            $this->documento,
+            $nom_tipo_docu,
+            $this->nombres,
+            $this->apellidos,
+            );
+            while(mysqli_stmt_fetch($query)){
+                array_push($User_buy,['id_venta_enca'=>$this->id_venta_enca, 'fecha_venta' =>$this->fecha_venta,'nom_tipo_docu' =>$nom_tipo_docu, 'nombres' => $this->nombres, 'apellidos' => $this->apellidos]);
+            }
+            mysqli_stmt_close($query);
+            return $User_buy;
+        }
+        catch(Throwable $exe){
+            echo $exe;
+            return false;
+        }
+    }
+
 }
