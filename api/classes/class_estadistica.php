@@ -17,10 +17,11 @@ class Estadistica extends Conecction{
     private $nombre_pago;
     private $detalle_venta;
     private $id_venta_enca;
+    private $id_prenda;
 
 
 
-    public function __construct($documento = null, $nombres = null, $apellidos = null, $fecha_venta = null, $fecha_creacion = null, $id_tipo_docu = null, $nombre_almacen = null, $nom_prenda = null, $precio = null, $talla = null, $cantidad = null, $valor_total_venta = null, $nombre_pago = null, $detalle_venta = null, $id_venta_enca = null)
+    public function __construct($documento = null, $nombres = null, $apellidos = null, $fecha_venta = null, $fecha_creacion = null, $id_tipo_docu = null, $nombre_almacen = null, $nom_prenda = null, $precio = null, $talla = null, $cantidad = null, $valor_total_venta = null, $nombre_pago = null, $detalle_venta = null, $id_venta_enca = null, $id_prenda = null)
     {
         parent::__construct();
         $this->documento = $documento;
@@ -38,6 +39,7 @@ class Estadistica extends Conecction{
         $this->nombre_pago = $nombre_pago;
         $this->detalle_venta = $detalle_venta;
         $this->id_venta_enca = $id_venta_enca;
+        $this->id_prenda = $id_prenda;
     }
 
     public function getDocumento(){
@@ -160,6 +162,14 @@ class Estadistica extends Conecction{
         $this->id_venta_enca = $id_venta_enca;
     }
 
+    public function getId_prenda(){
+        return $this->id_prenda;
+    }
+
+    public function setId_prenda($id_prenda){
+        $this->id_prenda = $id_prenda;
+    }
+
     public function getAllFactura(){
         try{
             $factura = [];
@@ -229,6 +239,59 @@ class Estadistica extends Conecction{
             }
             mysqli_stmt_close($query);
             return $factura_fecha;
+        }
+        catch(Throwable $exe){
+            echo $exe;
+            return false;
+        }
+    }
+
+    public function getCantidad_prendas_vendidas(){
+        try{
+            $Prendas_vendidas = [];
+            $sql = 'SELECT prendas.id_prenda,nom_prenda, SUM(cantidad) AS cantidad_prendas_Vendidas
+                    FROM prendas,detalle_venta WHERE detalle_venta.id_prenda = prendas.id_prenda
+                    GROUP BY id_prenda
+            ';
+            $query = mysqli_prepare($this->connection, $sql);
+            $ok = mysqli_stmt_execute($query);
+            $ok = mysqli_stmt_bind_result($query,
+            $this->id_prenda,
+            $this->nom_prenda, 
+            $this->cantidad, 
+            );
+            while(mysqli_stmt_fetch($query)){
+                array_push($Prendas_vendidas,['id_prenda'=>$this->id_prenda, 'nom_prenda' =>$this->nom_prenda, 'cantidad' => $this->cantidad]);
+            }
+            mysqli_stmt_close($query);
+            return $Prendas_vendidas;
+        }
+        catch(Throwable $exe){
+            echo $exe;
+            return false;
+        }
+    }
+
+    public function getDias_prendas_vendidas(){
+        try{
+            $Dias_Prendas_vendidas = [];
+            $sql = 'SELECT nom_prenda, timestampdiff(DAY, fecha_creacion, fecha_venta) AS Dias_Ventas 
+                    FROM prendas,detalle_venta,venta_encabezado 
+                    WHERE detalle_venta.id_prenda = prendas.id_prenda 
+                    AND detalle_venta.id_venta_enca = venta_encabezado.id_venta_enca 
+            ';
+            $query = mysqli_prepare($this->connection, $sql);
+            $ok = mysqli_stmt_execute($query);
+            $ok = mysqli_stmt_bind_result($query,
+            $this->id_prenda,
+            $this->nom_prenda, 
+            $this->cantidad, 
+            );
+            while(mysqli_stmt_fetch($query)){
+                array_push($Dias_Prendas_vendidas,['id_prenda'=>$this->id_prenda, 'nom_prenda' =>$this->nom_prenda, 'cantidad' => $this->cantidad]);
+            }
+            mysqli_stmt_close($query);
+            return $Dias_Prendas_vendidas;
         }
         catch(Throwable $exe){
             echo $exe;
