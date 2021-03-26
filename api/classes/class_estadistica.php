@@ -271,8 +271,7 @@ class Estadistica extends Conecction{
             return false;
         }
     }
-
-    public function getDias_prendas_vendidas(){
+    public function  getDias_prendas_vendidas(){
         try{
             $Dias_Prendas_vendidas = [];
             $sql = 'SELECT nom_prenda, timestampdiff(DAY, fecha_creacion, fecha_venta) AS Dias_Ventas 
