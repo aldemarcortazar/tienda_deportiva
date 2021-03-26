@@ -1,6 +1,8 @@
 <?php
 require_once '../classes/conexion.php';
 
+// clase estadistica, para hacer automatizacion
+
 class Estadistica extends Conecction{
     private $documento;
     private $nombres;
