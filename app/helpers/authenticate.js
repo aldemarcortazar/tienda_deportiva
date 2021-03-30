@@ -8,6 +8,7 @@ const authenticate = async ({documento , password }) => {
         method: 'GET',
         cbSuccess: ( user ) => {
             console.log(user);
+            localStorage.setItem('user', JSON.stringify(user.data));
             if( user.data.length > 0 ){
                 ( user.data[0].id_tip_usua == 1)
                 ? location.hash = '#/admin'

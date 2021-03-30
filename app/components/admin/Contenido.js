@@ -1,9 +1,11 @@
-const Conteni = () => {
+import Aside from "./aside.js";
 
-    const $Conteni = document.createElement('section')
-    $Conteni.innerHTML= 'Tienda Deportiva LUAL';
+const Contenido = () => {
 
-    return $Conteni
+    const $contenido = document.createElement('section');
+    $contenido.appendChild(Aside());
+
+    return $contenido;
 }
 
-export default Conteni;
+export default Contenido;
