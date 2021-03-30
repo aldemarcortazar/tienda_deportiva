@@ -86,7 +86,17 @@ class Estadistica extends Conecction{
     public function getAllFactura(){
         try{
             $factura = [];
-            $sql = 'SELECT venta_encabezado.id_venta_enca,fecha_venta,nombre_almacen,nom_prenda,precio,talla,cantidad,valor_total_venta, usuarios.documento ,nombres,apellidos ,
+            $sql = 'SELECT venta_encabezado.id_venta_enca,
+            fecha_venta,
+            nombre_almacen,
+            nom_prenda,
+            precio,
+            talla,
+            cantidad,
+            valor_total_venta,
+            usuarios.documento ,
+            nombres,
+            apellidos ,
             nombre_pago
             FROM detalle_venta,venta_encabezado,usuarios,prendas,forma_pago,talla,almacen
             WHERE detalle_venta.id_prenda = prendas.id_prenda
@@ -99,18 +109,31 @@ class Estadistica extends Conecction{
             $ok = mysqli_stmt_execute($query);
             $ok = mysqli_stmt_bind_result($query,
             $this->id_venta_enca,
-            $this->fecha_venta, 
-            $this->nombre_almacen, 
-            $this->nombres,
-            $this->apellidos,
-            $this->nom_prenda,  
-            $this->precio,
-            $this->talla,  
-            $this->cantidad,
-            $this->valor_total_venta,
-            $this->nombre_pago,);
+            $this->fecha_venta,
+            $nomAlmacen, 
+            $nombrePrenda, 
+            $precio,
+            $talla,
+            $cantidad,  
+            $valorToTalVenta,
+            $documento,  
+            $nombres,
+            $apellidos,
+            $nomPago
+        );
             while(mysqli_stmt_fetch($query)){
-                array_push($factura,['id_venta_enca'=>$this->id_venta_enca, 'fecha_venta' =>$this->fecha_venta, 'nom_prenda' => $this->nom_prenda, 'precio' => $this->precio, 'talla' => $this->talla, 'cantidad' => $this->cantidad, 'valor_total_venta' => $this->valor_total_venta, 'documento' => $this->documento, 'nombres' => $this->nombres, 'apellidos' => $this->apellidos, 'nombre_pago' => $this->nombre_pago]);
+                array_push($factura,['id_venta_enca'=>$this->id_venta_enca,
+                'fecha_venta' =>$this->fecha_venta,
+                'nom_almacen' => $nomAlmacen,
+                'nom_prenda' => $nombrePrenda,
+                'precio' => $precio,
+                'talla' => $talla, 
+                'cantidad' => $cantidad, 
+                'valor_total_venta' => $valorToTalVenta, 
+                'documento' => $documento, 
+                'nombres' => $nombres, 
+                'apellidos' => $apellidos, 
+                'nombre_pago' => $nomPago]);
             }
             mysqli_stmt_close($query);
             return $factura;

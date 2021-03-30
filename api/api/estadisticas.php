@@ -1,5 +1,5 @@
 <?php
-require_once './api/classes/class_estadistica.php';
+require_once './../classes/class_estadistica.php';
 header('Content-Type: application/json');
 function res( $array)
 {
@@ -20,7 +20,7 @@ function res( $array)
         );
     }
 
-    return $array;
+    return $res;
 }
 switch($_SERVER['REQUEST_METHOD']){
     case 'GET':
@@ -29,7 +29,7 @@ switch($_SERVER['REQUEST_METHOD']){
             $facturas = $facture->getAllFactura();
         
             echo json_encode(res($facturas));
-        }else if($_GET['facturas_fechas']){
+        }else if(isset($_GET['facturas_fechas'])){
             $facture = new Estadistica();
             $facturas = $facture->getAllFactura_fecha();
             echo json_encode(res($facturas));
@@ -37,12 +37,21 @@ switch($_SERVER['REQUEST_METHOD']){
             $facture = new Estadistica();
             $facturas = $facture->getCantidad_prendas_vendidas();
             echo json_encode(res($facturas));
-        }else if($_GET['dias_prendas_vendidas']){
+        }else if(isset($_GET['dias_prendas_vendidas'])){
             $facture = new Estadistica();
             $facturas = $facture->getDias_prendas_vendidas();
+            echo json_encode(res($facturas));
+        }else if( isset($_GET['dias_no_ven']) ){
+            $facture = new Estadistica();
+            $facturas = $facture->getDias_no_vendidas();
+            echo json_encode(res($facturas));
+        }else if(isset($_GET['user_buy'])){
+            $facture = new Estadistica();
+            $facturas = $facture->getUser_buy();
             echo json_encode(res($facturas));
         }
         break;
     case 'POST':
         break;
 }
+
