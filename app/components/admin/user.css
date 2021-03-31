@@ -65,7 +65,7 @@ aside a:not(.item-p){
     flex-direction: row;
 }
 .contenido table{
-    width:70%;
+    height: 45%;
     margin:3rem auto;
     border-spacing: 0;
 }
@@ -78,5 +78,30 @@ aside a:not(.item-p){
     width: 30%;
     margin:3px;
     text-align: center;
+}
+
+.encabezado {
+    background-color: #776f6f;
+    color: #ffffff;
+    width: 85%;
+}
+
+.encabezado1 {
+    background-color: #55bccc;
+    color: #ffffff;
+    width: 85%;
+}
+
+.tabla1{
+    position: relative;
+    left: 13%;
+}
+
+.tabla2{
+    width: 50%;
+    position: relative;
+    bottom: -100%;
+    left: -45%;
+    margin-top: 20%;  
 }
 
