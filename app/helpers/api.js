@@ -3,7 +3,8 @@ USER = `${API}usuario.php`,
 ALMACEN = `${API}almacen.php`,
 DETA_VENTA = `${API}detalle_vent.php`,
 VENTA_ENCA = `${API}venta_enca-php`,
-PRENDAS = `${API}prendas.php`;
+PRENDAS = `${API}prendas.php`,
+ESTADISTICA = `${API}estadisticas.php`;
 
 export default {
     API,
@@ -11,5 +12,6 @@ export default {
     ALMACEN,
     DETA_VENTA,
     VENTA_ENCA,
-    PRENDAS
+    PRENDAS,
+    ESTADISTICA
 }

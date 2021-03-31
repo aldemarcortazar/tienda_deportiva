@@ -37,9 +37,10 @@ header h1{
 aside{
     background-color: #1f1b1b;
     height: 100%;
-    width: 25%;
+    width: 20%;
 } 
 aside nav{
+    /* width: 15%; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -58,5 +59,24 @@ aside a:not(.item-p){
 .item-p{
     margin: 5vh 20px;
     color:#ffffff;
+}
+.contenido{
+    display:flex;
+    flex-direction: row;
+}
+.contenido table{
+    width:70%;
+    margin:3rem auto;
+    border-spacing: 0;
+}
+.contenido table tr{
+    margin: 0;
+    padding: 0;
+}
+.contenido table td{
+    border:1px solid #000000;
+    width: 30%;
+    margin:3px;
+    text-align: center;
 }
 

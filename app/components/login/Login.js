@@ -1,11 +1,10 @@
 // require("./login.css");
 // @import './login.css';
 
-// import authenticate from "../../helpers/authenticate";
-// import Loader from '../Loader.js';
 import FormSubmit from './FormSubmit.js';
-
 const Login = () => {
+    localStorage.removeItem('user');
+    window.history.forward();
     const $divForm = document.createElement('div');
     $divForm.classList.add("div-form");
     const $formulario = document.createElement("form");

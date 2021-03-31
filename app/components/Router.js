@@ -10,8 +10,10 @@ const Router = () => {
     $loader.style.display = "block";
     if( !hash || hash === "#/" ){
         $main.appendChild(Login());
-    }else if(hash == '#/admin'){
-        $main.appendChild(Principal());
+    }else if(hash.includes('#/admin')){
+        ( localStorage.getItem('user') )
+         ? $main.appendChild(Principal())
+         : location.hash = '#/';
     }else if( hash === "#/user"){
 
     }
