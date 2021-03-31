@@ -22,7 +22,7 @@ const Factura = () => {
         </tr>
     `;        
     ajax({
-        url: `${api.ESTADISTICA}/?all_factures`,
+        url: `${api.ESTADISTICA}/?all_facture`,
         method: 'GET',
         cbSuccess: ( facturas ) => {
             const { data } = facturas;
