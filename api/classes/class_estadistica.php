@@ -148,7 +148,7 @@ class Estadistica extends Conecction{
     public function getAllFactura_fecha(){
         try{
             $factura_fecha = [];
-            $sql = 'SELECT fecha_venta,nombre_almacen,nom_prenda,precio,talla,cantidad,valor_total_venta,nombres,apellidos,usuarios.documento, nombre_pago 
+            $sql = "SELECT fecha_venta,nombre_almacen,nom_prenda,precio,talla,cantidad,valor_total_venta,nombres,apellidos,usuarios.documento, nombre_pago 
                     FROM detalle_venta,venta_encabezado,usuarios,prendas,forma_pago,talla,almacen 
                     WHERE detalle_venta.id_prenda = prendas.id_prenda 
                     AND detalle_venta.id_venta_enca = venta_encabezado.id_venta_enca 
@@ -156,7 +156,7 @@ class Estadistica extends Conecction{
                     AND venta_encabezado.documento = usuarios.documento 
                     AND prendas.id_almacen = almacen.id_almacen 
                     AND prendas.id_talla = talla.id_talla 
-                    AND fecha_venta BETWEEN 2021-03-15 AND curdate()';
+                    AND fecha_venta BETWEEN '2021-03-21' AND curdate()";
             $query = mysqli_prepare($this->connection, $sql);
             $ok = mysqli_stmt_execute($query);
             $ok = mysqli_stmt_bind_result($query,
@@ -242,7 +242,7 @@ class Estadistica extends Conecction{
             $Dias_no_vendidas = [];
             $sql = 'SELECT nom_prenda,timestampdiff(DAY, fecha_creacion, curdate()) AS Dias_Sin_vender 
                     FROM prendas 
-                    WHERE NOT id_prenda IN (SELECT id_prenda FROM detalle_venta) ';
+                    WHERE NOT id_prenda IN (SELECT id_prenda FROM detalle_venta)';
             $query = mysqli_prepare($this->connection, $sql);
             $ok = mysqli_stmt_execute($query);
             $ok = mysqli_stmt_bind_result($query,

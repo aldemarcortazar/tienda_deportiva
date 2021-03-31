@@ -5,24 +5,25 @@ import api from "../../helpers/api.js";
 const Factura = () => {
     const $fragment = document.createDocumentFragment();
     const $table = document.createElement("table");
+    $table.classList.add('tabla1')
     $table.innerHTML = `
-        <tr>
-            <td> id_venta_enca </td> 
-            <td> fecha venta </td>
-            <td>  nombre almacen</td>
-            <td> nombre prenda </td>
-            <td> precio </td>
-            <td> talla </td>
-            <td> cantidad </td>
-            <td> valor total venta </td>
-            <td> documento </td>
-            <td> nombres </td>
-            <td> apellidos </td>
-            <td> forma de pago </td>
+        <tr class="encabezado">
+            <td> Id Venta </td> 
+            <td> Fecha Venta </td>
+            <td> Nombre almacen </td>
+            <td> Nombre prenda </td>
+            <td> Precio </td>
+            <td> Talla </td>
+            <td> Cantidad </td>
+            <td> V total venta </td>
+            <td> Documento </td>
+            <td> Nombres </td>
+            <td> Apellidos </td>
+            <td> Forma Pago </td>
         </tr>
     `;        
     ajax({
-        url: `${api.ESTADISTICA}/?all_factures`,
+        url: `${api.ESTADISTICA}/?all_facture`,
         method: 'GET',
         cbSuccess: ( facturas ) => {
             const { data } = facturas;
