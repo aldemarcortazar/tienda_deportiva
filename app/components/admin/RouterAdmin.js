@@ -1,9 +1,11 @@
 import CantidadPrendasvendidas from './CantidadPrendasVendidas.js';
 import Canvas from './Canvas.js';
-import FacturaFecha from "./FacturaFecha.js";
 import Factura from "./Facturas.js";
 import FechaReport from "./FechaReport.js";
 import Formularios from "./Formularios.js";
+import UsersBuy from './UsersBuy.js';
+import TitleUser from './TitleUser.js';
+import TitleShop from './TitleShop.js';
 
 
 const RouterAdmin = () => {
@@ -11,12 +13,16 @@ const RouterAdmin = () => {
     console.log(search);
     const $contenido = document.getElementById("cont");
     if( hash === "#/admin" || hash.includes('/?inicio') || hash.includes('/?compras')){
+        $contenido.appendChild(TitleShop());
         $contenido.appendChild(Factura());
         $contenido.appendChild(FechaReport());
         console.log($contenido);
     }else if( hash.includes('/?prendas') ){
         $contenido.appendChild(Canvas());
         CantidadPrendasvendidas();
+    }else if (hash.includes('/?usuarios')){
+        $contenido.appendChild(TitleUser());
+        $contenido.appendChild(UsersBuy());
     }
 
     Formularios();
