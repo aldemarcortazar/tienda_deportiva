@@ -6,7 +6,10 @@ const Contenido = () => {
     $contenido.classList.add("contenido");
     $contenido.id = "contenido";
     $contenido.appendChild(Aside());
-
+    const $div  = document.createElement("div");
+    $div.classList.add("cont");
+    $div.id = "cont";
+    $contenido.appendChild($div);
     return $contenido;
 }
 

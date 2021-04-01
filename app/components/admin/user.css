@@ -66,6 +66,7 @@ aside a:not(.item-p){
 }
 .contenido table{
     height: 45%;
+    width:95%;
     margin:3rem auto;
     border-spacing: 0;
 }
@@ -91,17 +92,41 @@ aside a:not(.item-p){
     color: #ffffff;
     width: 85%;
 }
-
-.tabla1{
-    position: relative;
-    left: 13%;
+.cont {
+    display:flex;
+    flex-direction: column;
 }
 
-.tabla2{
+.formu-fecha{
+    width:50%;
+    margin:0 30px;
+}
+
+.formu-fecha > input[type="date"]{
     width: 50%;
-    position: relative;
-    bottom: -100%;
-    left: -45%;
-    margin-top: 20%;  
+    height: 2rem;
 }
+
+.formu-fecha > input[type="submit"]{
+    background-color: #55bccc;
+    color:#ffffff;
+    width: 4rem;
+    height:2rem;
+    border:none;
+    outline: 0;
+    cursor:pointer;
+}
+/* #mycanvas{
+    width: 20%;
+    height: 20%;
+    /* padding: 70px; */
+/* }
+.chartjs-render-monitor{
+    width: 700px;
+    height: 700px;
+} */ 
+
+
+
+
 

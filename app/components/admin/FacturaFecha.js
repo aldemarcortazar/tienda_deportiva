@@ -2,9 +2,11 @@ import ajax from "../../helpers/ajax.js";
 import api from "../../helpers/api.js";
 
 
-const FacturaFecha = () => {
+const FacturaFecha = ( fecha ) => {
+
     const $fragment = document.createDocumentFragment();
     const $table = document.createElement("table");
+    $table.classList.add("tabla2");
     const $div = document.createElement("div");
     $div.classList.add("tabla2")
     $table.innerHTML =`
@@ -23,10 +25,11 @@ const FacturaFecha = () => {
         </tr>
     `;        
     ajax({
-        url: `${api.ESTADISTICA}/?facturas_fechas`,
+        url: `${api.ESTADISTICA}/?facturas_fechas=${fecha}`,
         method: 'GET',
         cbSuccess: ( facturasFecha ) => {
             const { data } = facturasFecha;
+            if( data.length == 0 ) $table.innerHTML = "no se encontraron ventas";
             data.forEach(facturaF => {
                 const $tr = document.createElement("tr");
                 $tr.innerHTML = `
@@ -47,7 +50,7 @@ const FacturaFecha = () => {
 
             $table.appendChild($fragment);
             console.log(facturasFecha);
-        }
+        },
     });
     $div.appendChild($table);
     return $div;

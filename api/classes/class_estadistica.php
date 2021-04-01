@@ -145,7 +145,7 @@ class Estadistica extends Conecction{
     }
 
     // Para poder clasificar las facturas segun la fecha que queramos ver
-    public function getAllFactura_fecha(){
+    public function getAllFactura_fecha( $fecha ){
         try{
             $factura_fecha = [];
             $sql = "SELECT fecha_venta,nombre_almacen,nom_prenda,precio,talla,cantidad,valor_total_venta,nombres,apellidos,usuarios.documento, nombre_pago 
@@ -156,8 +156,9 @@ class Estadistica extends Conecction{
                     AND venta_encabezado.documento = usuarios.documento 
                     AND prendas.id_almacen = almacen.id_almacen 
                     AND prendas.id_talla = talla.id_talla 
-                    AND fecha_venta BETWEEN '2021-03-21' AND curdate()";
+                    AND fecha_venta BETWEEN ? AND curdate()";
             $query = mysqli_prepare($this->connection, $sql);
+            $ok = mysqli_stmt_bind_param($query, 's' , $fecha);
             $ok = mysqli_stmt_execute($query);
             $ok = mysqli_stmt_bind_result($query,
             $this->fecha_venta,

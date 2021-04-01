@@ -30,9 +30,10 @@ switch($_SERVER['REQUEST_METHOD']){
         
             echo json_encode(res($facturas));
         }else if(isset($_GET['facturas_fechas'])){
+            $fecha = $_GET['facturas_fechas'];
             $facture = new Estadistica();
-            $facturas = $facture->getAllFactura_fecha();
-            echo json_encode(res($facturas));
+            $facturas = $facture->getAllFactura_fecha( $fecha );
+            echo json_encode( res($facturas) );
         }else if(isset($_GET['cantidad_prendas_vendidas'])){
             $facture = new Estadistica();
             $facturas = $facture->getCantidad_prendas_vendidas();
