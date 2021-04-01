@@ -82,9 +82,15 @@ aside a:not(.item-p){
 }
 
 .encabezado {
-    background-color: #776f6f;
+    background-color: #59f54b;
     color: #ffffff;
     width: 85%;
+}
+
+.encabezado3{
+    background-color: #54e74f;
+    color: #ffffff;
+    width: 90%;
 }
 
 .encabezado1 {
