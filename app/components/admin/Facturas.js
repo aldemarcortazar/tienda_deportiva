@@ -28,22 +28,22 @@ const Factura = () => {
         cbSuccess: ( facturas ) => {
             const { data } = facturas;
             data.forEach(factura => {
-               const $tr = document.createElement("tr");
-               $tr.innerHTML = `
+                const $tr = document.createElement("tr");
+                $tr.innerHTML = `
                     <td> ${factura.id_venta_enca} </td> 
                     <td> ${factura.fecha_venta} </td>
-                     <td>  ${factura.nom_almacen} </td>
-                     <td> ${factura.nom_prenda} </td>
-                     <td> ${factura.precio} </td>
-                     <td> ${factura.talla} </td>
-                     <td> ${factura.cantidad} </td>
-                     <td> ${factura.valor_total_venta} </td>
-                     <td> ${factura.documento} </td>
-                     <td> ${factura.nombres} </td>
-                     <td> ${factura.apellidos} </td>
-                     <td> ${factura.nombre_pago} </td>
-               `;
-               $fragment.appendChild($tr);
+                        <td>  ${factura.nom_almacen} </td>
+                        <td> ${factura.nom_prenda} </td>
+                        <td> ${factura.precio} </td>
+                        <td> ${factura.talla} </td>
+                        <td> ${factura.cantidad} </td>
+                        <td> ${factura.valor_total_venta} </td>
+                        <td> ${factura.documento} </td>
+                        <td> ${factura.nombres} </td>
+                        <td> ${factura.apellidos} </td>
+                        <td> ${factura.nombre_pago} </td>
+                `;
+                $fragment.appendChild($tr);
             });
 
             $table.appendChild($fragment);

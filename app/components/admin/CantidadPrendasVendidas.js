@@ -26,7 +26,7 @@ const CantidadPrendasvendidas = async () => {
     data: {
         labels,
         datasets: [{
-            label: '# of Votes',
+            label: 'Prendas Vendidas',
             data: arreglo,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',

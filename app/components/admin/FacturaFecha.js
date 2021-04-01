@@ -29,7 +29,7 @@ const FacturaFecha = ( fecha ) => {
         method: 'GET',
         cbSuccess: ( facturasFecha ) => {
             const { data } = facturasFecha;
-            if( data.length == 0 ) $table.innerHTML = "no se encontraron ventas";
+            if( data.length == 0 ) $table.innerHTML = "No se encontraron ventas en la fecha seleccionada";
             data.forEach(facturaF => {
                 const $tr = document.createElement("tr");
                 $tr.innerHTML = `

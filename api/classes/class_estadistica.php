@@ -241,9 +241,10 @@ class Estadistica extends Conecction{
     public function  getDias_no_vendidas(){
         try{
             $Dias_no_vendidas = [];
-            $sql = 'SELECT nom_prenda,timestampdiff(DAY, fecha_creacion, curdate()) AS Dias_Sin_vender 
+            $sql = 'SELECT nom_prenda,timestampdiff(DAY, fecha_creacion, curdate()) As Dias_Sin_Vender
                     FROM prendas 
-                    WHERE NOT id_prenda IN (SELECT id_prenda FROM detalle_venta)';
+                    WHERE NOT id_prenda IN (SELECT id_prenda FROM detalle_venta)
+                    AND  timestampdiff(DAY, fecha_creacion, curdate()) >= 10';
             $query = mysqli_prepare($this->connection, $sql);
             $ok = mysqli_stmt_execute($query);
             $ok = mysqli_stmt_bind_result($query,
@@ -292,5 +293,4 @@ class Estadistica extends Conecction{
             return false;
         }
     }
-
 }
