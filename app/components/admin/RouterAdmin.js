@@ -1,5 +1,6 @@
 import CantidadPrendasvendidas from './CantidadPrendasVendidas.js';
 import Canvas from './Canvas.js';
+import DiasPrendasVestidas from './DiasPrendasVestidas.js';
 import FacturaFecha from "./FacturaFecha.js";
 import Factura from "./Facturas.js";
 import FechaReport from "./FechaReport.js";
@@ -15,8 +16,12 @@ const RouterAdmin = () => {
         $contenido.appendChild(FechaReport());
         console.log($contenido);
     }else if( hash.includes('/?prendas') ){
-        $contenido.appendChild(Canvas());
+        $contenido.appendChild(Canvas("mycanvas"));
         CantidadPrendasvendidas();
+        $contenido.appendChild(Canvas("mycanvas2"));
+        DiasPrendasVestidas();
+    }else if( hash.includes('/?usuarios')){
+        $contenido.innerHTML = `<h2>holi</h2>`;
     }
 
     Formularios();

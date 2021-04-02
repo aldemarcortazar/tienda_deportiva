@@ -1,8 +1,8 @@
 
 
-const Canvas = () => {
+const Canvas = ( id ) => {
     const $canvas = document.createElement('canvas');
-    $canvas.id = "mycanvas";
+    $canvas.id = id ;
     $canvas.width = "1000";
     $canvas.height = "500";
     return $canvas;
