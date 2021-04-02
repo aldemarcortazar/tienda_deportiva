@@ -8,6 +8,7 @@ import Formularios from "./Formularios.js";
 import UsersBuy from './UsersBuy.js';
 import TitleUser from './TitleUser.js';
 import TitleShop from './TitleShop.js';
+import DiasSinvender from './DiasSinVender.js';
 
 
 const RouterAdmin = () => {
@@ -25,6 +26,8 @@ const RouterAdmin = () => {
 
         $contenido.appendChild(Canvas("mycanvas2"));
         DiasPrendasVestidas();
+        $contenido.appendChild(Canvas("mycanvas3"));
+        DiasSinvender();
     }else if (hash.includes('/?usuarios')){
         $contenido.appendChild(TitleUser());
         $contenido.appendChild(UsersBuy());

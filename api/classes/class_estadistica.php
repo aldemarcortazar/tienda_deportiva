@@ -252,7 +252,7 @@ class Estadistica extends Conecction{
             $dias_sin_vender,  
             );
             while(mysqli_stmt_fetch($query)){
-                array_push($Dias_no_vendidas,['id_prenda'=>$this->id_prenda, 'Dias_Sin_vender' =>$dias_sin_vender]);
+                array_push($Dias_no_vendidas,['nom_prenda'=>$this->nom_prenda, 'Dias_Sin_vender' =>$dias_sin_vender]);
             }
             mysqli_stmt_close($query);
             return $Dias_no_vendidas;
