@@ -23,7 +23,7 @@ const DiasSinvender = async () =>{
     data: {
         labels,
         datasets: [{
-            label: 'prendas sin vender',
+            label: 'Dias que lleva sin vender ',
             data: datos,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
