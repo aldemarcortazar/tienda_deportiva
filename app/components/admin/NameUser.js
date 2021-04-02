@@ -1,5 +1,3 @@
-  
-
 const NameUser = () => {
     const [ {apellidos , nombres} ] =  JSON.parse(localStorage.getItem('user'));
     const $datosUser = document.createElement('div');

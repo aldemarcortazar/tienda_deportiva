@@ -1,12 +1,14 @@
 import ajax from "../../helpers/ajax.js";
 import api from "../../helpers/api.js";
+import TitleShop from "./TitleShop.js"
+
 
 
 const Factura = () => {
     const $fragment = document.createDocumentFragment();
     const $table = document.createElement("table");
     $table.classList.add('tabla1')
-    $table.innerHTML = `
+    $table.innerHTML = ` 
         <tr class="encabezado">
             <td> Id Venta </td> 
             <td> Fecha Venta </td>
@@ -21,7 +23,8 @@ const Factura = () => {
             <td> Apellidos </td>
             <td> Forma Pago </td>
         </tr>
-    `;        
+    `;
+
     ajax({
         url: `${api.ESTADISTICA}/?all_facture`,
         method: 'GET',

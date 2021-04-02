@@ -283,7 +283,7 @@ class Estadistica extends Conecction{
             $this->apellidos,
             );
             while(mysqli_stmt_fetch($query)){
-                array_push($User_buy,['id_venta_enca'=>$this->id_venta_enca, 'fecha_venta' =>$this->fecha_venta,'nom_tipo_docu' =>$nom_tipo_docu, 'nombres' => $this->nombres, 'apellidos' => $this->apellidos]);
+                array_push($User_buy,['id_venta_enca'=>$this->id_venta_enca, 'fecha_venta' =>$this->fecha_venta,'documento' =>$this->documento,'nom_tipo_docu' =>$nom_tipo_docu, 'nombres' => $this->nombres, 'apellidos' => $this->apellidos]);
             }
             mysqli_stmt_close($query);
             return $User_buy;
