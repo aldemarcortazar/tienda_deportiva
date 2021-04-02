@@ -1,5 +1,6 @@
 import Login from './login/Login.js';
 import Principal from './admin/principal.js';
+import PrincipalUser from './user/PrincipalUser.js';
 
 const Router = () => {
     let { hash } = location;
@@ -14,8 +15,10 @@ const Router = () => {
         ( localStorage.getItem('user') )
          ? $main.appendChild(Principal())
          : location.hash = '#/';
-    }else if( hash === "#/user"){
-
+    }else if( hash === "#/usuario"){
+        ( localStorage.getItem('user') )
+         ? $main.appendChild(PrincipalUser())
+         : location.hash = '#/';
     }
     $loader.style.display = "none";
 }

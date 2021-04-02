@@ -122,6 +122,9 @@ aside a:not(.item-p){
     outline: 0;
     cursor:pointer;
 }
+.tabla3 td {
+    padding: 40px;
+}
 /* #mycanvas{
     width: 20%;
     height: 20%;
