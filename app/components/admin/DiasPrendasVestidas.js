@@ -1,6 +1,7 @@
 import ajax from './../../helpers/ajax.js';
 import api from './../../helpers/api.js';
-const DiasPrendasVestidas = async () => {
+
+const DiasPrendasVenta = async () => {
     const $ctx  = document.getElementById("mycanvas2");
     const numeros = [];
     const labels = [];
@@ -21,7 +22,7 @@ const DiasPrendasVestidas = async () => {
     data: {
         labels,
         datasets: [{
-            label: 'dias de prendas vestidas',
+            label: 'Dias que demoro en vender',
             data: numeros,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -57,4 +58,4 @@ const DiasPrendasVestidas = async () => {
 
 }
 
-export default DiasPrendasVestidas;
+export default DiasPrendasVenta;

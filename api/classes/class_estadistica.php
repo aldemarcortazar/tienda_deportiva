@@ -244,7 +244,7 @@ class Estadistica extends Conecction{
             $sql = 'SELECT nom_prenda,timestampdiff(DAY, fecha_creacion, curdate()) As Dias_Sin_Vender
                     FROM prendas 
                     WHERE NOT id_prenda IN (SELECT id_prenda FROM detalle_venta)
-                    AND  timestampdiff(DAY, fecha_creacion, curdate()) >= 10';
+                    AND  timestampdiff(DAY, fecha_creacion, curdate()) >= 6';
             $query = mysqli_prepare($this->connection, $sql);
             $ok = mysqli_stmt_execute($query);
             $ok = mysqli_stmt_bind_result($query,
