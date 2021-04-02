@@ -25,8 +25,6 @@ const RouterAdmin = () => {
 
         $contenido.appendChild(Canvas("mycanvas2"));
         DiasPrendasVestidas();
-    }else if( hash.includes('/?usuarios')){
-        $contenido.innerHTML = `<h2>holi</h2>`;
     }else if (hash.includes('/?usuarios')){
         $contenido.appendChild(TitleUser());
         $contenido.appendChild(UsersBuy());
