@@ -86,7 +86,7 @@ class Estadistica extends Conecction{
     public function getAllFactura(){
         try{
             $factura = [];
-            $sql = 'SELECT venta_encabezado.id_venta_enca,
+            $sql = 'SELECT detalle_venta.id_detalle_venta,
             fecha_venta,
             nombre_almacen,
             nom_prenda,
