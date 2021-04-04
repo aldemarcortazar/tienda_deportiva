@@ -9,6 +9,7 @@ import UsersBuy from './UsersBuy.js';
 import TitleUser from './TitleUser.js';
 import TitleShop from './TitleShop.js';
 import DiasSinvender from './DiasSinVender.js';
+//import FormSigunp from '../signup/FormSigunp.js'
 
 
 const RouterAdmin = () => {
@@ -33,7 +34,10 @@ const RouterAdmin = () => {
     }else if (hash.includes('/?usuarios')){
         $contenido.appendChild(TitleUser());
         $contenido.appendChild(UsersBuy());
-    }
+    }//else if (hash.includes('/?agg')){
+        //$contenido.appendChild(FormSigunp());
+        //ValidateSigup();
+    //}
 
     Formularios();
 }

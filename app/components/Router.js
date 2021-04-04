@@ -3,6 +3,7 @@ import Principal from './admin/principal.js';
 import PrincipalUser from './user/PrincipalUser.js';
 import FormSigunp from './signup/FormSigunp.js';
 import ValidateSigup from './signup/ValidateSigup.js';
+import FormCompra from './compras/FormCompra.js'
 
 const Router = () => {
     let { hash } = location;
@@ -16,6 +17,8 @@ const Router = () => {
     }else if( hash === "#/registrate"){
         $main.appendChild(FormSigunp());
         ValidateSigup();
+        //$main.appendChild(FormCompra());
+        
     }else if(hash.includes('#/admin')){
         ( localStorage.getItem('user') )
             ? $main.appendChild(Principal())
