@@ -15,6 +15,9 @@ const authenticate = async ({documento , password }) => {
                 : location.hash = '#/usuario'
 
                 console.log(user.data[0].id_tip_usua);
+            }else {
+                const $h1 = document.getElementById("h1");
+                $h1.outerHTML = `<h1 id="h1"> inicio de sesion erroneo <h1>`;
             };
             return false; 
         }

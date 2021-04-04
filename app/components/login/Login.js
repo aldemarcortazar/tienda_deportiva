@@ -12,7 +12,7 @@ const Login = () => {
     // $formulario.appendChild(Loader());
     $formulario.innerHTML = `
         <link rel="stylesheet" href="./app/components/login/login.css">
-        <h1>Iniciar Sesion</h1>
+        <h1 id="h1">Iniciar Sesion</h1>
             <label for="username">Username</label>
             <input type="number" name="username" id="username" class="username">
             <label for="password">Password</label>
@@ -20,7 +20,7 @@ const Login = () => {
 
             <input type="submit" value="Iniciar Sesion">
 
-            <p>¿No tienes cuenta? <a href="<?php constant('URL') ;?>signup"> Registrate</a></p>
+            <p>¿No tienes cuenta? <a href="#/registrate"> Registrate</a></p>
     `;
     $formulario.addEventListener("submit" , (e) => FormSubmit(e));
     $divForm.appendChild($formulario);

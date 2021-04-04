@@ -2,8 +2,11 @@
 
 const ajax = async({url, method, cbSuccess, data}) => {
     await fetch(url , {
-        body:data,
-        method
+        method,
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body:JSON.stringify(data),
     })
         .then( res => res.ok ? res.json() : Promise.reject(res))
         .then( data => cbSuccess(data) )

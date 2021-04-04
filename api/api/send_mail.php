@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 if( isset($_POST)){
 
     $domain = $_SERVER['HTTP_HOST'];
-    $to = "niocortazar25aldemar@gmail.com";
+    $to = "anino79@misena.edu.co";
     $subject = "ventas retrasadas de mas de 10 dias la tienda de ropa LUAL";
     $estadisticas = new Estadistica();
     $datos = $estadisticas->getDias_no_vendidas();
