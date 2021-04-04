@@ -18,12 +18,12 @@ const Router = () => {
         ValidateSigup();
     }else if(hash.includes('#/admin')){
         ( localStorage.getItem('user') )
-         ? $main.appendChild(Principal())
-         : location.hash = '#/';
+            ? $main.appendChild(Principal())
+            : location.hash = '#/';
     }else if( hash === "#/usuario"){
         ( localStorage.getItem('user') )
-         ? $main.appendChild(PrincipalUser())
-         : location.hash = '#/';
+            ? $main.appendChild(PrincipalUser())
+            : location.hash = '#/';
     }
     $loader.style.display = "none";
 }
