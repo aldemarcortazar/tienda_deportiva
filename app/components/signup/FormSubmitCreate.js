@@ -3,8 +3,8 @@ import api from "../../helpers/api.js";
 
 
 const FormSubmitCreate = async ( datos ) => {
-    const $loader = document.querySelector(".load");
-    $loader.style.display = "block"
+    const $loadd = document.querySelector(".load");
+    $loadd.style.display = 'block';
     await ajax({
         url: `${api.USER}`,
         method: 'POST',
@@ -15,7 +15,7 @@ const FormSubmitCreate = async ( datos ) => {
         data: datos
     });
 
-    $loader.style.display = "none";
+    $loadd.style.display = 'none';
 }
 
 export default FormSubmitCreate ;

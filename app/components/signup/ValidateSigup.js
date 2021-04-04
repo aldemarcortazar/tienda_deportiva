@@ -108,16 +108,16 @@ formulario.addEventListener('submit', async (e) => {
             correo: data.get('correo'),
         }
         console.log( values );
-		await FormSubmitCreate( values );
-		formulario.reset();
-		document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
-		setTimeout(() => {
-			document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
-		}, 5000);
+		FormSubmitCreate( values );
+		// formulario.reset();
+		// document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
+		// setTimeout(() => {
+		// 	document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
+		// }, 5000);
 
-		document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
-			icono.classList.remove('formulario__grupo-correcto');
-		});
+		// document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
+		// 	icono.classList.remove('formulario__grupo-correcto');
+		// });
 	} else {
 		document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
 	}
